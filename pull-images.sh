@@ -27,5 +27,5 @@
 # POSSIBILITY OF SUCH DAMAGE.
 
 docker pull devrt/xserver
-docker pull registry.hsr.io/public_sim/tmc_wrs_docker
-docker pull registry.hsr.io/public_sim/tmc_wrs_docker:nvidia
+docker pull devrt/ros-devcontainer-vscode:melodic-desktop
+docker pull docker.pkg.github.com/hsr-project/tmc_wrs_docker/tmc_wrs_docker
