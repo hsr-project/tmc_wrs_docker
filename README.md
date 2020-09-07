@@ -42,14 +42,8 @@ $ sudo chmod 755 /usr/local/bin/docker-compose
 以下のコマンドを入力して、このレポジトリをクローンしてください。
 
 ```sh
-$ git clone https://git.hsr.io/public_sim/tmc_wrs_docker.git
+$ git clone https://github.com/hsr-project/tmc_wrs_docker.git
 $ cd tmc_wrs_docker
-```
-
-以下のコマンドを入力して、docker registryサーバにログインします。ログインIDとパスワードはgit.hsr.ioと同じものを入力してください。
-
-```sh
-$ docker login registry.hsr.io
 ```
 
 シミュレータの実行に必要な各イメージをダウンロードします。
