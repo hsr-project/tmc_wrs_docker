@@ -24,35 +24,43 @@
 # CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE)
 # ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
 # POSSIBILITY OF SUCH DAMAGE.
-version: '2.3'
+version: "2.3"
 services:
   xserver:
     image: devrt/xserver
     ipc: host
+    security_opt:
+      - seccomp:unconfined
     environment:
       - DISPLAY=:1
     ports:
       - "3000:80"
+    healthcheck:
+      test: ["CMD-SHELL", "test -e /tmp/.X11-unix/X0"]
+      interval: "1s"
+      retries: 20
   simulator:
-    image: registry.hsr.io/public_sim/tmc_wrs_docker:nvidia
+    image: docker.pkg.github.com/hsr-project/tmc_wrs_docker/tmc_wrs_docker:nvidia
+    ipc: host
+    security_opt:
+      - seccomp:unconfined
     runtime: nvidia
     environment:
       - DISPLAY=:1
       - VGL_DISPLAY=:0
-    ipc: host
     volumes:
       - /tmp/.X11-unix/X0:/tmp/.X11-unix/X0
     volumes_from:
       - xserver
     depends_on:
       - xserver
-    entrypoint: ''
-    command: vglrun /start-simulator-fast-highrtf.sh
   workspace:
-    build:
-      context: .
-      dockerfile: Dockerfile
+    # env_file:
+    #   - .env
+    image: devrt/ros-devcontainer-vscode:melodic-desktop
     ipc: host
+    security_opt:
+      - seccomp:unconfined
     ports:
       - "3001:3000"
       - "3002:8888"
@@ -64,5 +72,6 @@ services:
       - ROS_MASTER_URI=http://simulator:11311/
     volumes_from:
       - xserver
+      - simulator
     depends_on:
       - xserver
