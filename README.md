@@ -1,33 +1,34 @@
-dockerのインストール
--------------------
+docker installation
+--------------------
 
-シミュレータの実行にはdockerとdocker-composeが必要です。
+In order to run the simulator, docker and docker-compose are necessary.
 
-WindowsとMacの場合、docker for window/macをインストールしてください。
+In the case of a Windows or Mac environment, please install docker for Windows or Mac respectively.
 
-Linuxの場合、以下のコマンドを入力してdockerをインストールしてください。
+In the case of Linux, please input the following commands and install docker.
 
 ```sh
 $ curl -fsSL https://get.docker.com -o get-docker.sh
 $ sh get-docker.sh
 ```
 
-以下のコマンドを入力して、一般ユーザでもdockerコマンドを実行可能にします。
+If you input the following command, even regular users will be able to execute the docker command.
 
 ```sh
 $ sudo usermod -aG docker <ユーザ名>
 ```
 
-コマンドを入力できたら、一度ログアウトしてログインしなおしてください。
+After executing the above command, log out then log in again.
 
-以下のコマンドを入力して、dockerが正常に実行できることを確認します。
+Input the following command, then verify that docker can execute correctly.
 
 ```sh
 $ docker info
 ```
 
-以下のコマンドを入力して、docker-composeをインストールします。
-apt-getでインストールできるdocker-composeは古いので、以下の各コマンドを入力して最新のdocker-composeをインストールしてください。
+Input the following commands and install docker-compose.
+As the docker-compose that can be installed via apt-get is old,
+please input all of the following commands to install the newest version of docker-compose.
 
 ```sh
 $ sudo apt-get remove docker-compose
@@ -36,84 +37,94 @@ $ sudo wget https://github.com/docker/compose/releases/download/${COMPOSE_VERSIO
 $ sudo chmod 755 /usr/local/bin/docker-compose
 ```
 
-使い方
------
+Usage
+------
 
-以下のコマンドを入力して、このレポジトリをクローンしてください。
+Please input the following commands to clone this repository.
 
 ```sh
 $ git clone https://github.com/hsr-project/tmc_wrs_docker.git
 $ cd tmc_wrs_docker
 ```
 
-シミュレータの実行に必要な各イメージをダウンロードします。
-大量のデータをダウンロードするので、高速なネットワーク回線に接続した環境で実行してください。
+Download all of the images necessary for running the simulator.
+As you will be downloading a large amount of data,
+please execute the following command in an environment that is connected to a high speed network.
 
 ```sh
 $ ./pull-images.sh
 ```
 
-シミュレータの起動
----------------
+Starting the simulator
+----------------------
 
-以下のコマンドを入力してシミュレータを起動してください。
+Please input the following command and start the simulator.
 
 ```sh
 $ docker-compose up
 ```
 
-以下の各URLをブラウザで開いて開発を進めてください。
+Please open each of the following URLs in a browser, then move on to development.
 
-- シミュレータ画面　http://localhost:3000
+- The simulator's screen http://localhost:3000
 - IDE http://localhost:3001
 - jupyter notebook http://localhost:3002
 
-GPU環境でのシミュレータの起動
--------------------------
+Starting the simulator in an environment with a GPU
+---------------------------------------------------
 
-nvidiaのビデオカードがある場合は、レンダリングをGPU上で行うことでシミュレーションを高速化することができます。
+If it is the case that there is an NVIDIA video card, then acceleration of the simulation through rendering on the GPU is possible.
 
-まずは、以下のURLを参考にnvidia-dockerをインストールしてください。
+First, please install nvidia-docker by referring to the following URL:
+
 https://github.com/NVIDIA/nvidia-docker
 
-レンダリングはサーバ上で立ち上がったディスプレイ番号0のXサーバ上で行います。
-以下のコマンドを入力してdocker内部からXサーバへのアクセスを許可してください。
+Next, perform rendering on display number 0 of the X server that was started up on the server.
+Please input the following command, to to give access from within docker to the X server.
+
 ```sh
 $ DISPLAY=:0 xhost si:localuser:root
 ```
 
-以下のコマンドを入力してシミュレータを起動してください。
+Please input the following command and start the simulator.
 
 ```sh
 $ docker-compose -f docker-compose.nvidia.yml up
 ```
 
-以下の各URLをブラウザで開いて開発を進めてください。
+Please open each of the following URLs in a browser, then move on to development.
 
-- シミュレータ画面　http://localhost:3000
+- The simulator's screen http://localhost:3000
 - IDE http://localhost:3001
 - jupyter notebook http://localhost:3002
 
-自律移動の実行
----------------
+Running autonomous movement
+----------------------------
 
-シミュレータ画面上のgazeboで、再生ボタン(左下の右矢印)をクリックしてシミュレーションを開始し、
-IDE上の画面下のターミナルにて、下記コマンドでrvizを起動してください。
+In gazebo in the simulator's screen, click the play button (the right facing arrow in the lower left of the screen), and start the simulation.
+Into the terminal of the IDE screen, please input the following command to start rviz:
 
 ```
 rviz -d $(rospack find hsrb_rosnav_config)/launch/hsrb.rviz
 ```
 
-rvizはシミュレータ画面上に表示されます。rviz上の「2D Nav Goal」をクリックし、自律移動のゴールをクリックすると目的の場所まで自律移動します。
+rviz will appear in the simulator's screen.
+If you click "2D Nav Goal" in rviz and click the autonomous movement goal,
+then the HSR will move autonomously to the goal location.
 
-dockerのhost PCでの操作
----------------
+Operation within the docker host PC
+-----------------------------------
 
-docker imageを立ち上げているhost PCからシミュレータ上のroscoreと通信するには、ROS_MASTER_URIを適切に設定する必要があります。本package直下にある下記スクリプトをsourceすることで、ROS_MASTER_URIの設定が可能です。
+In order to communicate from the host PC that is running the docker image with the simulator's roscore,
+it is necessary that ROS_MASTER_URI is set appropriately.
+If you source the script that is located directly under this package as illustrated below,
+then it is possible to set ROS_MASTER_URI.
+
 ```sh
 $ source ./set-rosmaster.sh
 ```
-シミュレータを開始後、host PCにてROS通信ができることを確認してください。
+
+After starting the simulator, please check that ROS communication is working using the host PC.
 
 Authors
 ---------------
