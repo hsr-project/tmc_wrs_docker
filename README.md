@@ -15,7 +15,7 @@ $ sh get-docker.sh
 If you input the following command, even regular users will be able to execute the docker command.
 
 ```sh
-$ sudo usermod -aG docker <ユーザ名>
+$ sudo usermod -aG docker <USERNAME>
 ```
 
 After executing the above command, log out then log in again.
