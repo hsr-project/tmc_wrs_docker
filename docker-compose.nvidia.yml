@@ -40,7 +40,7 @@ services:
       interval: "1s"
       retries: 20
   simulator:
-    image: docker.pkg.github.com/hsr-project/tmc_wrs_docker/tmc_wrs_docker:nvidia
+    image: ghcr.io/hsr-project/tmc_wrs_docker:nvidia
     ipc: host
     security_opt:
       - seccomp:unconfined
