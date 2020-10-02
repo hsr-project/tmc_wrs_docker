@@ -1,3 +1,10 @@
+HSRについて
+-------------------
+
+Human Support Robot (HSR）についての情報入手および論文等に利用される場合には、以下をご参照ください。
+
+https://robomechjournal.springeropen.com/articles/10.1186/s40648-019-0132-3
+
 dockerのインストール
 -------------------
 
