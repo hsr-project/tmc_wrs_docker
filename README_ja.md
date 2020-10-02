@@ -49,7 +49,7 @@ $ sudo chmod 755 /usr/local/bin/docker-compose
 以下のコマンドを入力して、このレポジトリをクローンしてください。
 
 ```sh
-$ git clone https://github.com/hsr-project/tmc_wrs_docker.git
+$ git clone --recursive https://github.com/hsr-project/tmc_wrs_docker.git
 $ cd tmc_wrs_docker
 ```
 
