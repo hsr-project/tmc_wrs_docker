@@ -1,3 +1,10 @@
+About the HSR
+--------------------
+
+Please refer to the following to obtain information about Human Support Robot (HSR) and use it in your paper.
+
+https://robomechjournal.springeropen.com/articles/10.1186/s40648-019-0132-3
+
 docker installation
 --------------------
 
@@ -43,7 +50,7 @@ Usage
 Please input the following commands to clone this repository.
 
 ```sh
-$ git clone https://github.com/hsr-project/tmc_wrs_docker.git
+$ git clone --recursive https://github.com/hsr-project/tmc_wrs_docker.git
 $ cd tmc_wrs_docker
 ```
 
