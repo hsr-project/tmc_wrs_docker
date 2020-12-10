@@ -57,10 +57,13 @@ services:
   workspace:
     # env_file:
     #   - .env
-    image: devrt/ros-devcontainer-vscode:melodic-desktop
+    build:
+      context: .
+      dockerfile: Dockerfile.nvidia
     ipc: host
     security_opt:
       - seccomp:unconfined
+    runtime: nvidia
     ports:
       - "3001:3000"
       - "3002:8888"
