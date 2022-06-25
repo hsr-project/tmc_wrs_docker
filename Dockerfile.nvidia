@@ -5,9 +5,9 @@ USER root
 # Most of the code is originated from:
 # https://gitlab.com/nvidia/container-images/cuda/-/blob/master/dist/10.0/ubuntu18.04-x86_64/base/Dockerfile
 
-RUN curl -fsSL https://developer.download.nvidia.com/compute/cuda/repos/ubuntu1804/x86_64/7fa2af80.pub | apt-key add - && \
-    echo "deb https://developer.download.nvidia.com/compute/cuda/repos/ubuntu1804/x86_64 /" > /etc/apt/sources.list.d/cuda.list && \
-    echo "deb https://developer.download.nvidia.com/compute/machine-learning/repos/ubuntu1804/x86_64 /" > /etc/apt/sources.list.d/nvidia-ml.list
+RUN sudo apt-key del 7fa2af80 && \
+    curl -O https://developer.download.nvidia.com/compute/cuda/repos/ubuntu1804/x86_64/cuda-keyring_1.0-1_all.deb && \
+    sudo dpkg -i cuda-keyring_1.0-1_all.deb
 
 RUN apt-get update && apt-get install -y --no-install-recommends \
     cuda-cudart-10-0 \
