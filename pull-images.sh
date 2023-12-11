@@ -27,5 +27,5 @@
 # POSSIBILITY OF SUCH DAMAGE.
 
 docker pull devrt/xserver
-docker pull devrt/ros-devcontainer-vscode:melodic-desktop
-docker pull ghcr.io/hsr-project/tmc_wrs_docker
+docker pull devrt/ros-devcontainer-vscode:noetic-desktop
+docker pull ghcr.io/hsr-project/tmc_wrs_binary:noetic-latest

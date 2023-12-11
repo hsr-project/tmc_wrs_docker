@@ -38,7 +38,7 @@ services:
       interval: "1s"
       retries: 20
   simulator:
-    image: ghcr.io/hsr-project/tmc_wrs_docker:latest
+    image: ghcr.io/hsr-project/tmc_wrs_binary:noetic-latest
     ipc: host
     security_opt:
       - seccomp:unconfined
@@ -51,7 +51,7 @@ services:
   workspace:
     # env_file:
     #   - .env
-    image: devrt/ros-devcontainer-vscode:melodic-desktop
+    image: devrt/ros-devcontainer-vscode:noetic-desktop
     ipc: host
     security_opt:
       - seccomp:unconfined
