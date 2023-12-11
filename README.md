@@ -86,13 +86,6 @@ First, please install nvidia-docker by referring to the following URL:
 
 https://github.com/NVIDIA/nvidia-docker
 
-Next, perform rendering on display number 0 of the X server that was started up on the server.
-Please input the following command, to to give access from within docker to the X server.
-
-```sh
-$ DISPLAY=:0 xhost si:localuser:root
-```
-
 Please input the following command and start the simulator.
 
 ```sh

@@ -83,12 +83,6 @@ nvidiaのビデオカードがある場合は、レンダリングをGPU上で�
 まずは、以下のURLを参考にnvidia-dockerをインストールしてください。
 https://github.com/NVIDIA/nvidia-docker
 
-レンダリングはサーバ上で立ち上がったディスプレイ番号0のXサーバ上で行います。
-以下のコマンドを入力してdocker内部からXサーバへのアクセスを許可してください。
-```sh
-$ DISPLAY=:0 xhost si:localuser:root
-```
-
 以下のコマンドを入力してシミュレータを起動してください。
 
 ```sh

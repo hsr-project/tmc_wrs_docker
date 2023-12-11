@@ -1,4 +1,4 @@
-FROM devrt/ros-devcontainer-vscode:melodic-desktop
+FROM devrt/ros-devcontainer-vscode:noetic-desktop
 
 USER root
 

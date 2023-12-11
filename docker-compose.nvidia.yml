@@ -31,8 +31,6 @@ services:
     ipc: host
     security_opt:
       - seccomp:unconfined
-    environment:
-      - DISPLAY=:1
     ports:
       - "3000:80"
     healthcheck:
@@ -40,16 +38,13 @@ services:
       interval: "1s"
       retries: 20
   simulator:
-    image: ghcr.io/hsr-project/tmc_wrs_docker:nvidia
+    image: ghcr.io/hsr-project/tmc_wrs_binary:noetic-nvidia
     ipc: host
     security_opt:
       - seccomp:unconfined
     runtime: nvidia
     environment:
-      - DISPLAY=:1
-      - VGL_DISPLAY=:0
-    volumes:
-      - /tmp/.X11-unix/X0:/tmp/.X11-unix/X0
+      - DISPLAY=:0
     volumes_from:
       - xserver
     depends_on:
@@ -71,7 +66,7 @@ services:
       - .:/workspace:cached
       - ~/.gitconfig:/home/developer/.gitconfig
     environment:
-      - DISPLAY=:1
+      - DISPLAY=:0
       - ROS_MASTER_URI=http://simulator:11311/
     volumes_from:
       - xserver
